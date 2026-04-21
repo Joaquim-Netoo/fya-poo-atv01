@@ -1,0 +1,80 @@
+class PersonagemRPG:
+    def __init__(self, nome, classe):
+        self.__nome = nome
+
+        if classe == "Guerreiro":
+            self.__classe = classe
+            self.__vidaMaxima = 150
+        elif classe == "Mago":
+            self.__classe = classe
+            self.__vidaMaxima = 80
+        else:
+            raise ValueError("Classe inválida. Use 'Guerreiro' ou 'Mago'.")
+
+        self.__nivel = 1
+        self.__vidaAtual = self.__vidaMaxima
+
+    def estaVivo(self):
+        return self.__vidaAtual > 0
+
+    def receberDano(self, pontos):
+        if pontos > 0:
+            self.__vidaAtual -= pontos
+
+            if self.__vidaAtual < 0:
+                self.__vidaAtual = 0
+
+            return True
+        else:
+            return False
+
+    def curar(self, pontos):
+        if not self.estaVivo():
+            return False
+
+        if pontos > 0:
+            self.__vidaAtual += pontos
+
+            if self.__vidaAtual > self.__vidaMaxima:
+                self.__vidaAtual = self.__vidaMaxima
+
+            return True
+        else:
+            return False
+
+    def subirNivel(self):
+        if not self.estaVivo():
+            return False
+
+        if self.__nivel < 99:
+            self.__nivel += 1
+            self.__vidaMaxima = round(self.__vidaMaxima * 1.10)
+            self.__vidaAtual = self.__vidaMaxima
+            return True
+        else:
+            return False
+
+    def ressuscitar(self):
+        if not self.estaVivo():
+            self.__vidaAtual = self.__vidaMaxima
+            return True
+        else:
+            return False
+
+    def consultarNome(self):
+        return self.__nome
+
+    def consultarClasse(self):
+        return self.__classe
+
+    def consultarNivel(self):
+        return self.__nivel
+
+    def consultarVidaAtual(self):
+        return self.__vidaAtual
+
+    def consultarVidaMaxima(self):
+        return self.__vidaMaxima
+
+    def __str__(self):
+        return f"{self.__nome} ({self.__classe}) - Lvl {self.__nivel} - HP: {self.__vidaAtual}/{self.__vidaMaxima}"
