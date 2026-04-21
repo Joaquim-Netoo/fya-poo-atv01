@@ -1,0 +1,51 @@
+class ContaCorrenteUniversitaria:
+    def __init__(self, numero, titular):
+        self.__numero = numero
+        self.__titular = titular
+        self.__saldo = 0
+        self.__limite = 500
+
+    def consultarNumero(self):
+        return self.__numero
+
+    def consultarTitular(self):
+        return self.__titular
+
+    def alterarTitular(self, novoTitular):
+        if novoTitular != "":
+            self.__titular = novoTitular
+            return True
+        else:
+            return False
+
+    def consultarSaldo(self):
+        return self.__saldo
+
+    def consultarLimite(self):
+        return self.__limite
+
+    def consultarSaldoTotal(self):
+        return self.__limite + self.__saldo
+
+    def consultarStatusDaConta(self):
+        if self.__saldo < 0:
+            return "Negativo"
+        else:
+            return "Positivo"
+
+    def depositar(self, valor):
+        if valor > 0:
+            self.__saldo += valor
+            return True
+        else:
+            return False
+
+    def sacar(self, valor):
+        if valor > 0 and valor <= self.consultarSaldoTotal():
+            self.__saldo -= valor
+            return True
+        else:
+            return False
+
+    def __str__(self):
+        return f"Conta: {self.__numero} | Titular: {self.__titular} | Saldo: {self.__saldo} | Limite: {self.__limite}"
