@@ -1,0 +1,31 @@
+class Lampada:
+    def __init__ (self,marca,tecnologia):
+        self.__marca = marca
+        self.__tecnologia = tecnologia
+        self.__estado = False
+        self.__brilho = 100
+
+    def alternar (self):
+        self.__estado = not self.__estado
+
+    def ajustarBrilho(self,novoBrilho): 
+        if self.__estado:
+            if novoBrilho >=0 and novoBrilho <=100:
+                self.__brilho = novoBrilho 
+                print("o brilho foi alterado")
+            else:
+                print("o brilho é inválido")                          
+        else:
+            print("a lâmpada está desligada")
+
+    def consultarMarca(self):
+        return (self.__marca)
+
+    def consultarEstado(self):
+        return (self.__estado)
+
+    def consultarBrilho(self):
+        return (self.__brilho)
+
+    def consultarTecnologia(self):
+        return (self.__tecnologia)
