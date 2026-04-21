@@ -1,0 +1,36 @@
+class Cofre:
+    def __init__(self,dono,senha):
+        self.__dono = dono
+        self.__senha = senha
+        self.__estaAberto = False
+        self.__tentativasErradas = 0
+
+    def consultarEstado(self):
+        if self.__estaAberto:
+            return "aberto"
+        else:
+            return "fechado"
+        
+    def fechar(self):
+       self.__estaAberto = False
+
+    def abrir(self, senhaInformada):
+        if self.__tentativasErradas >=3:
+            return "cofre bloqueado"
+        
+        if senhaInformada == self.__senha:
+            self.__estaAberto = True
+            self.__tentativasErradas = 0
+            return "o cofre esta aberto"
+
+        else:
+            self.__tentativasErradas += 1
+            return "senha incorreta"
+        
+    def alterarSenha(self,senhaAntiga,senhaNova):
+        if self.__estaAberto == True and senhaAntiga == self.__senha:
+            self.__senha = senhaNova
+            return "sua senha foi alterada"
+        else:
+            self.__estaAberto = False #medida de segurança
+            return "senha incorreta"
